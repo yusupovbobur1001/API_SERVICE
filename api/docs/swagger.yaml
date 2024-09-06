@@ -1,0 +1,440 @@
+basePath: /
+definitions:
+  models.Response:
+    properties:
+      data: {}
+      description:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  models.UpdateDetail:
+    properties:
+      description:
+        type: string
+      priority:
+        type: string
+      status:
+        type: string
+      task_id:
+        type: string
+    type: object
+  models.UpdateTask:
+    properties:
+      title:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.User:
+    properties:
+      email:
+        type: string
+      password_hash:
+        type: string
+      role:
+        type: string
+      user_name:
+        type: string
+    type: object
+  task_service.Detail:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      priority:
+        type: string
+      status:
+        type: string
+      task_id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  task_service.DetailRequest:
+    properties:
+      description:
+        type: string
+      priority:
+        type: string
+      status:
+        type: string
+      task_id:
+        type: string
+    type: object
+  task_service.Task:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  task_service.TaskRequest:
+    properties:
+      title:
+        type: string
+      user_id:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Task Control API Documentation
+  title: Task Control API
+  version: "1.0"
+paths:
+  /task_service/details:
+    get:
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search query
+        in: query
+        name: search
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get all details
+      tags:
+      - detail
+    post:
+      parameters:
+      - description: Detail data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/task_service.DetailRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/task_service.Detail'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Create detail
+      tags:
+      - detail
+  /task_service/details/{id}:
+    delete:
+      parameters:
+      - description: Detail id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete detail by id
+      tags:
+      - detail
+    get:
+      parameters:
+      - description: Detail id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get detail by id
+      tags:
+      - detail
+    put:
+      parameters:
+      - description: Detail id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Detail data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateDetail'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Update detail by id
+      tags:
+      - detail
+  /task_service/tasks:
+    get:
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search query
+        in: query
+        name: search
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get all tasks
+      tags:
+      - task
+    post:
+      parameters:
+      - description: Task data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/task_service.TaskRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/task_service.Task'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Create task
+      tags:
+      - task
+  /task_service/tasks/{id}:
+    delete:
+      parameters:
+      - description: Task id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete task by id
+      tags:
+      - task
+    get:
+      parameters:
+      - description: Task id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get task by id
+      tags:
+      - task
+    put:
+      parameters:
+      - description: Task id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Task data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateTask'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Update task by id
+      tags:
+      - task
+  /user_service/users:
+    get:
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Search query
+        in: query
+        name: search
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get all users
+      tags:
+      - user
+  /user_service/users/{id}:
+    delete:
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete user by id
+      tags:
+      - user
+    get:
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get user by id
+      tags:
+      - user
+    put:
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Update user by id
+      tags:
+      - user
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
